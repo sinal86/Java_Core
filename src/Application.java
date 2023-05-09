@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/* предварительно заданная в задании структура*/
+/* РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ Р·Р°РґР°РЅРЅР°СЏ РІ Р·Р°РґР°РЅРёРё СЃС‚СЂСѓРєС‚СѓСЂР°*/
 interface Student {
     String getName();
     List<Course> getAllCourses();
 }
 interface Course {}
 
-/* реализация объектов данных */
+/* СЂРµР°Р»РёР·Р°С†РёСЏ РѕР±СЉРµРєС‚РѕРІ РґР°РЅРЅС‹С… */
 class CourseClass implements Course {
-    String title; // название
+    String title; // РЅР°Р·РІР°РЅРёРµ
 
     public CourseClass(String title) {
         this.title = title;
@@ -53,15 +53,15 @@ class StudentClass implements Student {
 
     @Override
     public String toString() {
-        return "Студент \'" + name + '\'' + ", записан на курсы = " + courses ;
+        return "РЎС‚СѓРґРµРЅС‚ \'" + name + '\'' + ", Р·Р°РїРёСЃР°РЅ РЅР° РєСѓСЂСЃС‹ = " + courses ;
     }
 }
 
 public class Application {
 
     static Set<String> task1(List<StudentClass> students) {
-        // Задание 1
-        // Функцияя принимающая список Student и возвращающую список уникальных курсов, на которые подписаны студенты.
+        // Р—Р°РґР°РЅРёРµ 1
+        // Р¤СѓРЅРєС†РёСЏСЏ РїСЂРёРЅРёРјР°СЋС‰Р°СЏ СЃРїРёСЃРѕРє Student Рё РІРѕР·РІСЂР°С‰Р°СЋС‰СѓСЋ СЃРїРёСЃРѕРє СѓРЅРёРєР°Р»СЊРЅС‹С… РєСѓСЂСЃРѕРІ, РЅР° РєРѕС‚РѕСЂС‹Рµ РїРѕРґРїРёСЃР°РЅС‹ СЃС‚СѓРґРµРЅС‚С‹.
         return students.stream()
                 .map(x -> x.getAllCourses())
                 .flatMap(x -> x.stream())
@@ -70,9 +70,9 @@ public class Application {
     }
 
     static List<Student> task2(List<StudentClass> students) {
-        // Задание 2
-        // Написать функцию, принимающую на вход список Student и возвращающую список из трех самых любознательных (любознательность определяется количеством курсов)
-        // (любознательность определяется количеством курсов)
+        // Р—Р°РґР°РЅРёРµ 2
+        // РќР°РїРёСЃР°С‚СЊ С„СѓРЅРєС†РёСЋ, РїСЂРёРЅРёРјР°СЋС‰СѓСЋ РЅР° РІС…РѕРґ СЃРїРёСЃРѕРє Student Рё РІРѕР·РІСЂР°С‰Р°СЋС‰СѓСЋ СЃРїРёСЃРѕРє РёР· С‚СЂРµС… СЃР°РјС‹С… Р»СЋР±РѕР·РЅР°С‚РµР»СЊРЅС‹С… (Р»СЋР±РѕР·РЅР°С‚РµР»СЊРЅРѕСЃС‚СЊ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РєРѕР»РёС‡РµСЃС‚РІРѕРј РєСѓСЂСЃРѕРІ)
+        // (Р»СЋР±РѕР·РЅР°С‚РµР»СЊРЅРѕСЃС‚СЊ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РєРѕР»РёС‡РµСЃС‚РІРѕРј РєСѓСЂСЃРѕРІ)
         List<Student> res = students.stream()
                 .sorted((x, y) -> (int) (y.getAllCourses().size() - x.getAllCourses().size()))
                 .limit(3)
@@ -81,9 +81,9 @@ public class Application {
     }
 
     static List<Student> task3(List<StudentClass> students, String toFind) {
-        // Задание 3
-        // Написать функцию, принимающую на вход список Student и экземпляр Course, возвращающую список студентов,
-        // которые посещают этот курс.
+        // Р—Р°РґР°РЅРёРµ 3
+        // РќР°РїРёСЃР°С‚СЊ С„СѓРЅРєС†РёСЋ, РїСЂРёРЅРёРјР°СЋС‰СѓСЋ РЅР° РІС…РѕРґ СЃРїРёСЃРѕРє Student Рё СЌРєР·РµРјРїР»СЏСЂ Course, РІРѕР·РІСЂР°С‰Р°СЋС‰СѓСЋ СЃРїРёСЃРѕРє СЃС‚СѓРґРµРЅС‚РѕРІ,
+        // РєРѕС‚РѕСЂС‹Рµ РїРѕСЃРµС‰Р°СЋС‚ СЌС‚РѕС‚ РєСѓСЂСЃ.
         List<Student> res = students.stream()
                 .filter(x -> x.getAllCourses().toString().contains(toFind))
                 .collect(Collectors.toList());
@@ -92,30 +92,30 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        // тестовые данные
+        // С‚РµСЃС‚РѕРІС‹Рµ РґР°РЅРЅС‹Рµ
         List<StudentClass> students = new ArrayList<>();
-        students.add(new StudentClass("Толя", "курс1, курс2, курс3, курс4, курс5, курс6"));
-        students.add(new StudentClass("Вася", "курс1, курс2, курс3, курс4, курс5"));
-        students.add(new StudentClass("Света", "курс1, курс2, курс3, курс4, курс5, курс6, курс7"));
-        students.add(new StudentClass("Оля", "курс1, курс2, курс3, курс5, курс6"));
-        students.add(new StudentClass("Маша", "курс1, курс2, курс3, курс5"));
-        students.add(new StudentClass("Лера", "курс2, курс3, курс5"));
-        students.add(new StudentClass("Дарина", "курс2, курс3, курс5, курс8, курс9, курс10, курс11"));
+        students.add(new StudentClass("РўРѕР»СЏ", "РєСѓСЂСЃ1, РєСѓСЂСЃ2, РєСѓСЂСЃ3, РєСѓСЂСЃ4, РєСѓСЂСЃ5, РєСѓСЂСЃ6"));
+        students.add(new StudentClass("Р’Р°СЃСЏ", "РєСѓСЂСЃ1, РєСѓСЂСЃ2, РєСѓСЂСЃ3, РєСѓСЂСЃ4, РєСѓСЂСЃ5"));
+        students.add(new StudentClass("РЎРІРµС‚Р°", "РєСѓСЂСЃ1, РєСѓСЂСЃ2, РєСѓСЂСЃ3, РєСѓСЂСЃ4, РєСѓСЂСЃ5, РєСѓСЂСЃ6, РєСѓСЂСЃ7"));
+        students.add(new StudentClass("РћР»СЏ", "РєСѓСЂСЃ1, РєСѓСЂСЃ2, РєСѓСЂСЃ3, РєСѓСЂСЃ5, РєСѓСЂСЃ6"));
+        students.add(new StudentClass("РњР°С€Р°", "РєСѓСЂСЃ1, РєСѓСЂСЃ2, РєСѓСЂСЃ3, РєСѓСЂСЃ5"));
+        students.add(new StudentClass("Р›РµСЂР°", "РєСѓСЂСЃ2, РєСѓСЂСЃ3, РєСѓСЂСЃ5"));
+        students.add(new StudentClass("Р”Р°СЂРёРЅР°", "РєСѓСЂСЃ2, РєСѓСЂСЃ3, РєСѓСЂСЃ5, РєСѓСЂСЃ8, РєСѓСЂСЃ9, РєСѓСЂСЃ10, РєСѓСЂСЃ11"));
 
-        System.out.println("-- Все студенты -------------------------------");
+        System.out.println("-- Р’СЃРµ СЃС‚СѓРґРµРЅС‚С‹ -------------------------------");
         students.stream().forEach(System.out::println);
 
-        // Задание 1 тест
-        System.out.println("-- Задание №1 ---------------------------------");
+        // Р—Р°РґР°РЅРёРµ 1 С‚РµСЃС‚
+        System.out.println("-- Р—Р°РґР°РЅРёРµ в„–1 ---------------------------------");
         System.out.println(task1(students));
 
-        // Задание 2 тест
-        System.out.println("-- Задание №2 ---------------------------------");
+        // Р—Р°РґР°РЅРёРµ 2 С‚РµСЃС‚
+        System.out.println("-- Р—Р°РґР°РЅРёРµ в„–2 ---------------------------------");
         task2(students).stream().forEach(System.out::println);
 
-        // Задание 3 тест
-        System.out.println("-- Задание №3 ---------------------------------");
-        String COURSE_NAME = "курс6";
+        // Р—Р°РґР°РЅРёРµ 3 С‚РµСЃС‚
+        System.out.println("-- Р—Р°РґР°РЅРёРµ в„–3 ---------------------------------");
+        String COURSE_NAME = "РєСѓСЂСЃ6";
         task3(students, COURSE_NAME).stream().forEach(System.out::println);
     }
 }
